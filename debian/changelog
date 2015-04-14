@@ -1,3 +1,10 @@
+danuntu-config (20150414-1) unstable; urgency=low
+
+  * Danuntu support
+
+ -- Daniil Gentili <daniil.gentili.dg@gmail.com>  Tue, 14 Apr 2015 20:18:40 +0000
+
+
 raspi-config (20150131-1) unstable; urgency=low
 
   * Add Pi2 overclock preset

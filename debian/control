@@ -1,7 +1,7 @@
 Source: danuntu-config
 Section: unknown
 Priority: extra
-Maintainer: Alex Bradbury <asb@asbradbury.org>
+Maintainer: Daniil Gentili <daniil.gentili.dg@gmail.com>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.2
 Homepage: http://danuntu.magix.net

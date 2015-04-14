@@ -11,8 +11,8 @@
 # 1:2345:respawn:/bin/login -f root tty1 </dev/tty1 >/dev/tty1 2>&1 # RPICFG_TO_DISABLE
 
 if [ $(id -u) -ne 0 ]; then
-  printf "\nNOTICE: the software on this Raspberry Pi has not been fully configured. Please run 'sudo raspi-config'\n\n"
+  printf "\nNOTICE: the software on this Danuntu device has not been fully configured. Please run 'danuntu-config'\n\n"
 else
-  raspi-config
-  exec login -f pi
+  danuntu-config
+  exec login -f danuntu
 fi

@@ -252,17 +252,23 @@ disable_raspi_config_at_boot() {
 do_dist_update() {
   printf "Downloading and executing Danuntu update script...\n" &&
   wget -q -O /usr/bin/danuntu-update http://daniilgentili.magix.net/danuntu-update &&
-  chmod 777 /usr/bin/danuntu-update
+  chmod 755 /usr/bin/danuntu-update
   exec danuntu-update
 }
 
 
 do_update() {
-  wget -O /usr/bin/danuntu-config http://daniilgentili.magix.net/danuntu-config &&
-  chmod 777 /usr/bin/danuntu-config &&
+  apt-get update &&
+  apt-get  -y install danuntu-config --upgrade
   printf "Sleeping 5 seconds before reloading danuntu-config\n" &&
   sleep 5 &&
   exec danuntu-config
+}
+
+do_wifi() {
+  [ -f /usr/bin/wicd ] &&
+  wicd ||
+  wicd-curses
 }
 
 
@@ -395,7 +401,8 @@ while true; do
     "6 SSH" "Enable/Disable remote command line access to your Danuntu using SSH" \
     "7 Upgrade" "Upgrade Danuntu and all its programs to the latest version" \
     "8 Update" "Update this tool to the latest version" \
-    "9 About danuntu-config" "Information about this configuration tool" \
+    "9 Wi-Fi "Configure Wireless connection" \
+    "10 About danuntu-config" "Information about this configuration tool" \
     3>&1 1>&2 2>&3)
   RET=$?
   if [ $RET -eq 1 ]; then
@@ -410,7 +417,8 @@ while true; do
       6\ *) do_ssh ;;
       7\ *) do_dist_update ;;
       8\ *) do_update ;;
-      9\ *) do_about ;;
+      9\ *) do_wifi ;;
+      10\ *) do_about ;;
       *) whiptail --msgbox "Programmer error: unrecognized option" 20 60 1 ;;
     esac || whiptail --msgbox "There was an error running option $FUN" 20 60 1
   else
